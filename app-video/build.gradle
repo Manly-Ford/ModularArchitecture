@@ -1,0 +1,30 @@
+apply from: '../app.gradle'
+
+android {
+    namespace 'com.ts.video'
+    // 资源文件命名规范
+    resourcePrefix 'video_'
+    defaultConfig {
+        if (!isRelease) {
+            applicationId "com.ts.video"
+            versionCode 1
+            versionName "1.0"
+        }
+    }
+
+    sourceSets {
+        main {
+            if (isRelease) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                // 过滤掉任意路径下面的debug文件
+                java.exclude '**/debug/**'
+            } else {
+                manifest.srcFile 'src/main/DebugAndroidManifest.xml'
+            }
+        }
+    }
+}
+
+dependencies {
+
+}

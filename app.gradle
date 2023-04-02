@@ -1,0 +1,42 @@
+plugins.apply('org.jetbrains.kotlin.android')
+
+if (isRelease) {
+    plugins.apply('com.android.library')
+} else {
+    plugins.apply('com.android.application')
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 33
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation androidx.ktx
+    implementation androidx.appcompat
+    implementation google.material
+    implementation androidx.constraintlayout
+    testImplementation test.junit
+    androidTestImplementation test.ext
+    androidTestImplementation test.espresso
+    implementation project(':lib-base')
+}

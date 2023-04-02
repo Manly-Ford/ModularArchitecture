@@ -1,0 +1,32 @@
+apply from: '../app.gradle'
+
+android {
+    namespace 'com.ts.message'
+    // 资源文件命名规范
+    resourcePrefix 'message_'
+
+    defaultConfig {
+        if (!isRelease) {
+            applicationId "com.ts.message"
+            versionCode 1
+            versionName "1.0"
+        }
+    }
+
+    // 配置资源文件
+    sourceSets {
+        main {
+            if (isRelease) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                // 过滤掉任意路径下面的debug文件
+                java.exclude '**/debug/**'
+            } else {
+                manifest.srcFile 'src/main/DebugAndroidManifest.xml'
+            }
+        }
+    }
+}
+
+dependencies {
+
+}
